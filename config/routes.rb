@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   resources :searches
   get :fetch_data, to: "searches#fetch_data"
 
-  # root 'searches#index'
+  root 'searches#home'
 
 end

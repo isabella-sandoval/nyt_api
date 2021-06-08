@@ -10,6 +10,10 @@ def show
     render json: @search
 end
 
+def home
+    render html:'Hello Hotel Engine team! Please see the README for instructions'
+end
+
 def fetch_data
     params.permit(:author, :publisher, :description, :title, :sort)
 
