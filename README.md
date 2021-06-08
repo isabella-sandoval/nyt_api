@@ -1,24 +1,45 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## NYT Best Sellers API
+[LiveSite](www.site.come)
 
-Things you may want to cover:
+**Overview**
+NYT Best Sellers API is a lightweight Rails application that displays valid JSON of NYT Best selling books by author and/or publisher. The application does not have a frontend and is purely interacted with through the URL query string. It requests and consumes from external API, New York Times Books API.
 
-* Ruby version
 
-* System dependencies
+**Technologies**
+Rails 5.2.6
+Ruby 2.7.1
 
-* Configuration
+## Setup
+**Install gems required by application:** 
 
-* Database creation
+    bundle
 
-* Database initialization
+**Next, execute the database migrations/schema setup:**
 
-* How to run the test suite
+	bundle exec rake db:setup
 
-* Services (job queues, cache servers, search engines, etc.)
+## Start the app
 
-* Deployment instructions
+    rails server
 
-* ...
+## Search by Author and/or Publisher
+
+The client will search the name of a chosen author and/or publisher within the query string in key-value pairs and with '&' as a parameter seperator. Examples below.
+
+**By author:**
+    /fetch_data?author=Stephen King
+**By publisher:**
+    /fetch_data?publisher=DC Comics
+**By author & publisher:**
+    /fetch_data?author=Stephen King&publisher=DC Comics
+    
+
+**Sort data**
+The client is able to sort by title, author, publisher & description by utilizing the 'sort' key within the query string. Examples below.
+
+    /fetch_data?author=Stephen King&sort=title
+
+
+    /fetch_data?author=Roxane Gay&sort=description

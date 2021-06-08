@@ -36,9 +36,10 @@ def fetch_data
     sql_string = "SELECT * FROM searches WHERE #{sql_string} ORDER BY #{sort_by}"
     results = Search.find_by_sql(sql_string)
 
-      #check db
+    #low level caching
+    # Rails.cache.fetch()
+    #check db
     if results.present?
-        # debugger
         render json: results
     else
     #fetch from api 
