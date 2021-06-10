@@ -46,6 +46,7 @@ The client is able to sort by title, author, publisher & description by utilizin
 
 
 **In-progress**
+
 Update RSPECs
 
 Deploy to Heroku
