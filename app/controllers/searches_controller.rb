@@ -16,44 +16,46 @@ end
 
 def fetch_data
     params.permit(:author, :publisher, :description, :title, :sort)
-
+    
     sql_string = ""
     querie_string = ""
     sort_by = params[:sort] ? params[:sort].downcase : "title"
-
-    if(params[:author].present?)
-      sql_string += " OR "if(sql_string.length > 1)
-      sql_string += "lower(author) LIKE '%#{params[:author].downcase}%'"
-
-      querie_string += "&"if(sql_string.length > 1)
-      querie_string += "author=#{params[:author].downcase}"
+    
+    inputs = [:author, :publisher]
+    
+    inputs.each do |input|
+        if(params[input].present?)
+            sql_string += " OR "if(sql_string.length > 1)
+            sql_string += "lower(#{input}) LIKE '%#{params[input].downcase}%'"
+            
+            querie_string += "&"if(sql_string.length > 1)
+            querie_string += "#{input}=#{params[input].downcase}"
+        end
     end
-
-    if(params[:publisher].present?)
-      sql_string += " OR "if(sql_string.length > 1)
-      sql_string += "lower(publisher) LIKE '%#{params[:publisher].downcase}%'"
-
-      querie_string += "&"if(sql_string.length > 1)
-      querie_string += "publisher=#{params[:publisher].downcase}"
-    end
-
+    
     sql_string = "SELECT * FROM searches WHERE #{sql_string} ORDER BY #{sort_by}"
     results = Search.find_by_sql(sql_string)
+    
 
-    #low level caching
-    # Rails.cache.fetch()
+    cached_results = Rails.cache.read("#{sql_string}")
+    #check cache
+    if cached_results
+        render json: cached_results
+        
     #check db
-    if results.present?
+    elsif results.present?
         render json: results
-    else
+        Rails.cache.write("#{sql_string}", results)
+
     #fetch from api 
+    else
     response = RestClient.get("https://api.nytimes.com/svc/books/v3/lists/best-sellers/history.json?#{querie_string}&api-key=#{ENV["API_KEY"]}")
     books_array = JSON.parse(response)["results"]
 
-    books_array.each do |book|
+    books = books_array.each do |book|
         Search.create(title: book["title"], description: book["description"], author: book["author"], publisher: book["publisher"])
     end
-        render json: response
+        render json: books
     end
 
     end
