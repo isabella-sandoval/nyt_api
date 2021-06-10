@@ -1,7 +1,7 @@
 # README
 
 ## NYT Best Sellers API
-[LiveSite](www.site.come)
+<!-- [LiveSite](www.site.come) -->
 
 **Overview**
 NYT Best Sellers API is a lightweight Rails application that displays valid JSON of NYT Best selling books by author and/or publisher. The application does not have a frontend and is purely interacted with through the URL query string. It requests and consumes from external API, New York Times Books API.
@@ -43,3 +43,11 @@ The client is able to sort by title, author, publisher & description by utilizin
 
 
     /fetch_data?author=Roxane Gay&sort=description
+
+
+**In-progress**
+Update RSPECs
+
+Deploy to Heroku
+
+Implement authentication

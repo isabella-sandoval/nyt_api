@@ -18,7 +18,7 @@ def fetch_data
     params.permit(:author, :publisher, :description, :title, :sort)
     
     sql_string = ""
-    querie_string = ""
+    query_string = ""
     sort_by = params[:sort] ? params[:sort].downcase : "title"
     
     inputs = [:author, :publisher]
@@ -28,8 +28,8 @@ def fetch_data
             sql_string += " OR "if(sql_string.length > 1)
             sql_string += "lower(#{input}) LIKE '%#{params[input].downcase}%'"
             
-            querie_string += "&"if(sql_string.length > 1)
-            querie_string += "#{input}=#{params[input].downcase}"
+            query_string += "&"if(sql_string.length > 1)
+            query_string += "#{input}=#{params[input].downcase}"
         end
     end
     
@@ -49,7 +49,7 @@ def fetch_data
 
     #fetch from api 
     else
-    response = RestClient.get("https://api.nytimes.com/svc/books/v3/lists/best-sellers/history.json?#{querie_string}&api-key=#{ENV["API_KEY"]}")
+    response = RestClient.get("https://api.nytimes.com/svc/books/v3/lists/best-sellers/history.json?#{query_string}&api-key=#{ENV["API_KEY"]}")
     books_array = JSON.parse(response)["results"]
 
     books = books_array.each do |book|
