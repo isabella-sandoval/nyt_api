@@ -8,7 +8,9 @@ NYT Best Sellers API is a lightweight Rails application that displays valid JSON
 
 
 **Technologies**
+
 Rails 5.2.6
+
 Ruby 2.7.1
 
 ## Setup
