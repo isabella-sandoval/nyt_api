@@ -29,10 +29,15 @@ Ruby 2.7.1
 The client will search the name of a chosen author and/or publisher within the query string in key-value pairs and with '&' as a parameter seperator. Examples below.
 
 **By author:**
+
     /fetch_data?author=Stephen King
+    
 **By publisher:**
+
     /fetch_data?publisher=DC Comics
+    
 **By author & publisher:**
+
     /fetch_data?author=Stephen King&publisher=DC Comics
     
 
