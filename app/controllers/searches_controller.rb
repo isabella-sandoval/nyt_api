@@ -11,7 +11,7 @@ def show
 end
 
 def home
-    render html:'Hello Hotel Engine team! Please see the README for instructions'
+    render html:'Hey there! Please see the README for instructions'
 end
 
 def fetch_data
