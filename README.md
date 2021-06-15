@@ -8,7 +8,9 @@ NYT Best Sellers API is a lightweight Rails application that displays valid JSON
 
 
 **Technologies**
+
 Rails 5.2.6
+
 Ruby 2.7.1
 
 ## Setup
@@ -29,10 +31,15 @@ Ruby 2.7.1
 The client will search the name of a chosen author and/or publisher within the query string pararameters (this is everything after the '?' in the URL) in key-value pairs with '&' as a parameter seperator. Examples below.
 
 **By author:**
+
     /fetch_data?author=Stephen King
+    
 **By publisher:**
+
     /fetch_data?publisher=DC Comics
+    
 **By author & publisher:**
+
     /fetch_data?author=Stephen King&publisher=DC Comics
     
 
@@ -46,6 +53,7 @@ The client is able to sort by title, author, publisher & description by utilizin
 
 
 **In-progress**
+
 Update RSPECs
 
 Deploy to Heroku
